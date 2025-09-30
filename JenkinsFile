@@ -1,0 +1,39 @@
+pipeline {
+    agent any
+
+    environment {
+        CI = 'true'
+    }
+
+    stages {
+        stage('Install Dependencies') {
+            steps {
+                script {
+                    if (fileExists('package-lock.json')) {
+                        sh 'npm ci'
+                    } else {
+                        sh 'npm install'
+                    }
+                }
+            }
+        }
+        stage('Run Playwright Tests') {
+            steps {
+                sh 'npx playwright install --with-deps'
+                sh 'npx playwright test'
+            }
+        }
+        stage('Archive Test Results') {
+            steps {
+                junit 'playwright-report/*.xml'
+                archiveArtifacts artifacts: 'playwright-report/**', allowEmptyArchive: true
+            }
+        }
+    }
+
+    post {
+        always {
+            cleanWs()
+        }
+    }
+}
