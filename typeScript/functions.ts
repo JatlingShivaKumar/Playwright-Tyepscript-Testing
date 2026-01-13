@@ -29,13 +29,13 @@ function functionName(arguments): return datatype{
 
 
 // Addition of 2 numbers
-function add(a,b) //a,b - Arguments
+function add(a: number, b: number) //a,b - Arguments
 {
     console.log(a+b)
 }
 add(12,34) //12, 34  is Parameter
 
-function add1(a,b) :number //a,b - Arguments
+function add1(a: number,b: number) :number //a,b - Arguments
 {
     return a+b
 }
@@ -111,7 +111,7 @@ const arrow1 = (name1:string) => ("You are name is " +name1)
 
 //Default parameter is a parameter which has a defaul value assigned to it if the value is not provided while calling the function, it will take the default value
 
-function addition(a=10,b,c=90){
+function addition(a=10,b: number,c=90){
 console.log(a+b+c)
 }
 addition(10,40)
@@ -124,7 +124,7 @@ addition(10,40,55)
 //Optional Parameter - ?
 //Optional parameter is a parameter which is not mandatory to be passed while calling the function. If the value is not provided while calling the function, It will take the default value or undefined.
 
-function addtion2(a,b,c?){
+function addtion2(a: number,b: number,c?: number | undefined){
   if(c !== undefined)
   console.log(a+b+c)
 else{
@@ -133,3 +133,4 @@ else{
 }
 addtion2(20,30)// NaN - Not a Number
 addtion2(20,30,45)
+
